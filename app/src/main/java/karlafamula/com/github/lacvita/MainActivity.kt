@@ -1,47 +1,40 @@
 package karlafamula.com.github.lacvita
 
+import android.app.Activity
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.platform.LocalContext
+import androidx.navigation.compose.rememberNavController
+import karlafamula.com.github.lacvita.navigation.LacVitaNavGraph
 import karlafamula.com.github.lacvita.ui.theme.LacVitaTheme
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            LacVitaTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
-            }
+            LacVitaApp()
         }
     }
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
+fun LacVitaApp() {
     LacVitaTheme {
-        Greeting("Android")
+        Surface(modifier = Modifier.fillMaxSize()) {
+            val navController = rememberNavController()
+            val activity = LocalContext.current as? Activity
+            LacVitaNavGraph(
+                navController = navController,
+                onExitApp = { activity?.finish() }
+            )
+        }
     }
 }
