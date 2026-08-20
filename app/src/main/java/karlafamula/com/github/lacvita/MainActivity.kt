@@ -14,7 +14,10 @@ import androidx.navigation.compose.rememberNavController
 import karlafamula.com.github.lacvita.navigation.LacVitaNavGraph
 import karlafamula.com.github.lacvita.ui.theme.LacVitaTheme
 
-
+/**
+ * Activity única do LacVita. Toda a navegação entre telas é feita via Jetpack Navigation
+ * Compose, controlada pelo grafo definido em [LacVitaNavGraph].
+ */
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
